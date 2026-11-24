@@ -12,32 +12,3 @@ Using the tool: Upon opening the script the user will be asked to input a positi
 
 
 Once provided with a valid number the script will count up to the users number with a one second wait between outputs. When the script is finished counting it will ask the user if they want to count again. If the user inputs ‘Y’ or ‘y’ the script resets and asks the user for a new number. If given any other response the script ends and the user is returned to the command line.
-
-#!/bin/bash
-while true; do
-	count=0
-	#user is asked for a number to input
-	while true; do
-	read -p "Enter a positive number to count to:" number
-	#If user inputs anything put a positive number they are asked again
-		if [[ $number =~ ^[0-9]+$ ]] && ((number > 0 )); then
-			break
-		else
-			echo "Invalid! Enter a positive number to count to:"
-		fi
-	done
-	#Count to users number, waiting one second between numbers
-	while [[ $count -le $number ]]; do
-		echo "$count"
-		((count++))
-		sleep 1
-	done
-
-	#Ask user if they want to restart the script
-	read -p "Would you like to count again? (Y/N)" answer
-
-	if [[ $answer != "y" && $answer != "Y" ]]; then
-		echo "Thanks for counting see you soon!"
-		break
-	fi
-done
